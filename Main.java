@@ -7,7 +7,7 @@ public class Main
     
      Scanner sc= new Scanner(System.in);
     while(true){
-        System.out.println("Enter airthmatic express \n Example  56+3,56-3,56*3,56/3,56%3");
+        System.out.println("Enter airthmatic express  ");
     
     String exp=sc.nextLine();
     try {
@@ -30,62 +30,126 @@ public class Main
 
 class calc{
     public static String solve(String exp){
-
-
-        if(exp.contains("*")){
-            String num[]=exp.split("[*]");
-
-            float num1 = Float.parseFloat(num[0]);
-            float  num2= Float.parseFloat(num[1]);
-            return String.valueOf(num1*num2);
-        }
-
-
- 
+         
+        // SUM 
         if(exp.contains("+")){
             String num[]=exp.split("[+]");
 
-            float  num1 = Float.parseFloat(num[0]);
-            float  num2= Float.parseFloat(num[1]);
-            return String.valueOf(num1+num2);
+          for(int i=0;i<num.length;i++)
+          { float flt;
+             try{
+               flt= Float.parseFloat(num[i]);
+               }
+              catch(Exception e)
+               { 
+                 flt=Float.parseFloat(solve(num[i]));
+               }   
 
+             num[i]=String.valueOf(flt);  
+          }
+         
+          float result=0;
+          for (String str : num)
+           { 
+               result+=Float.parseFloat(str);
+           }
+        
+          return String.valueOf(result);
+
+  
         }
 
 
- 
+
+// SUB
         if(exp.contains("-")){
             String num[]=exp.split("[-]");
 
-            float num1 = Float.parseFloat(num[0]);
-            float  num2= Float.parseFloat(num[1]);
-      return String.valueOf(num1-num2);
+          for(int i=0;i<num.length;i++)
+          { float flt;
+             try{
+               flt= Float.parseFloat(num[i]);
+               }
+              catch(Exception e)
+               { 
+                 flt=Float.parseFloat(solve(num[i]));
+               }   
 
-        }
+             num[i]=String.valueOf(flt);  
+          }
+         
+          float result=2*Float.parseFloat(num[0]);
+          for (String str : num)
+           { 
+               result-=Float.parseFloat(str);
+           }
+        
+          return String.valueOf(result);
 
- 
-        if(exp.contains("/")){
-                String num[]=exp.split("[/]");
-            
-
-            float num1 = Float.parseFloat(num[0]);
-            float  num2= Float.parseFloat(num[1]);
-
-          return String.valueOf(num1/num2);
-
-        }
-
-
- 
-        if(exp.contains("%")){
-           String num[]=exp.split("[%]");
-
-            float num1 = Float.parseFloat(num[0]);
-            float  num2= Float.parseFloat(num[1]);
-
-         return  String.valueOf(num1%num2);
-        }
   
+        }
+
  
+
+        // MUL
+        if(exp.contains("*")){
+            String num[]=exp.split("[*]");
+
+          for(int i=0;i<num.length;i++)
+          { float flt;
+             try{
+               flt= Float.parseFloat(num[i]);
+               }
+              catch(Exception e)
+               { 
+                 flt=Float.parseFloat(solve(num[i]));
+               }   
+
+             num[i]=String.valueOf(flt);  
+          }
+         
+          float result=1;
+          for (String str : num)
+           { 
+               result*=Float.parseFloat(str);
+           }
+        
+          return String.valueOf(result);
+
+  
+        }
+
+
+
+//DIV
+
+        if(exp.contains("/")){
+            String num[]=exp.split("[/]");
+
+          for(int i=0;i<num.length;i++)
+          { float flt;
+             try{
+               flt= Float.parseFloat(num[i]);
+               }
+              catch(Exception e)
+               { 
+                 flt=Float.parseFloat(solve(num[i]));
+               }   
+
+             num[i]=String.valueOf(flt);  
+          }
+         
+          float result=Float.parseFloat(num[0])*Float.parseFloat(num[0]);
+          for (String str : num)
+           { 
+               result/=Float.parseFloat(str);
+           }
+        
+          return String.valueOf(result);
+
+  
+        }
+
  
      return "Invalid expression !";   
 
